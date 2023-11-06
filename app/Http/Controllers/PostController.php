@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
 
 
     public function __construct()
+    
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show','index']);
         
    /*      En Laravel, $this hace referencia a la instancia actual del controlador en el que se encuentra ese código.
          Cuando colocas $this->middleware('auth'); en un controlador de Laravel, estás llamando a un método del controlador
@@ -20,6 +22,7 @@ class PostController extends Controller
         En este caso, $this->middleware('auth'); se utiliza para aplicar el middleware de autenticación
          ('auth') a todas las acciones (métodos) definidas en ese controlador. Esto significa que antes de que se 
          ejecute cualquiera de las acciones en ese controlador, Laravel verificará si el usuario está autenticado. */
+
     }
 
     public function index(User $user)
@@ -85,6 +88,23 @@ class PostController extends Controller
         ]);
 
         return redirect()->route('posts.index', auth()->user()->username);
+
+    }
+
+    public function destroy(Post $post){
+       $this->authorize('delete',$post);
+       //Illuminate\Database\Eloquent\Model::delete
+       $post->delete();
+
+       //creamos el url donde se almacenan las imagenes
+        $imagen_path = public_path('uploads/' . $post->imagen);
+
+        //facade para eliminar archivo
+        if(File::exists($imagen_path)){
+            //lo elimina
+            unlink($imagen_path);
+        }
+       return redirect()->route('posts.index', auth()->user()->username);
 
     }
 }

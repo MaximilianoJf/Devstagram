@@ -21,7 +21,7 @@ const dropzone = new Dropzone(".dropzone", {
             const imagenPublicada = {};
             //asignar un tamaño ficticio
             imagenPublicada.size = 1234;
-            //ASIGNAR EL NOMBRE DE LA IMAGEN AL VALUE ESCONDIDO DEL FORM
+            //ASIGNAR EL NOMBRE DE LA IMAGEN del VALUE ESCONDIDO DEL FORM
             imagenPublicada.name = document.querySelector('[name="imagen"]').value;
 
             this.options.addedfile.call(this,imagenPublicada);
@@ -64,7 +64,7 @@ Swal.fire({
     })
 });
 
+//asignar value de la imagen al input oculto
 dropzone.on("success", function (file,response){
-    console.log(response.imagen);
     document.querySelector('[name="imagen"]').value = response.imagen;
 });

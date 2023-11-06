@@ -40,7 +40,7 @@
                         Email
                     </label>
                     <input id="email" name="email"
-                    type="email" placeholder="Email de registro" class="border p-1  w-full rounded-lg @error('name') border-red-500 @enderror"">
+                    type="email" placeholder="Email de registro" class="border p-1  w-full rounded-lg @error('email') border-red-500 @enderror"">
                     @error('email')
                     <p class="text-center text-sm text-white my-2 p-2 bg-red-500 rounded-lg">{{$message}}</p>
                     @enderror

@@ -47,7 +47,7 @@
                         <p class="text-center text-sm text-white my-2 p-2 bg-red-500 rounded-lg">{{$message}}</p>
                     @enderror
                 </div>
-
+                 {{-- input que contiene el nombre de la imagen oculto --}}
                 <div class="mb-5">
                     <input 
                     name="imagen"

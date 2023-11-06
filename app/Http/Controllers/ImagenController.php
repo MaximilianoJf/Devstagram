@@ -12,6 +12,8 @@ class ImagenController extends Controller
         //imagen que qqueda en memoria
         $imagen = $request->file('file');
 
+        
+
         //dar un id unico a la imagen
         $nombreImagen = Str::uuid() . "." . $imagen->extension();
 
